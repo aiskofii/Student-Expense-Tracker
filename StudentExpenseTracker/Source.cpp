@@ -1,19 +1,19 @@
 #include <iostream>
 #include <iomanip>
+#include <cstdlib>
 using namespace std;
-void mainMenu();
+
+const int MAX = 100;
+
+string expenseName[MAX];
+double expenseAmount[MAX];
+int expenseCount = 0;
+
 void addExpenses();
 void viewExpensesList();
 void setBudgetLimit();
 
 int main() {
-	mainMenu();
-
-
-	return 0;
-}
-
-void mainMenu() {
 	int option;
 	char exitChoice;
 	bool exitStatus = false;
@@ -45,30 +45,48 @@ void mainMenu() {
 
 			if (toupper(exitChoice) == 'Y') {
 				cout << "Exiting program. Goodbye!" << endl;
-				exitStatus = true;
+				exit(0);
 				break;
 			}
 
 			if (toupper(exitChoice) == 'N') {
 				cout << endl;
-				mainMenu();
 				break;
 			}
 		default:
 			cout << "Invalid option. Please try again.\n" << endl;
-			mainMenu();
 			break;
 		}
 	}
+	return 0;
 }
 
 void addExpenses() {
-	
+
 }
 
 void viewExpensesList() {
+	if (expenseCount == 0) {
+		cout << "\nNo expenses recorded yet.\n" << endl;
+		return;
+	}
 
+	cout << "\n===== EXPENSE LIST =====\n";
+	cout << left << setw(5) << "No"
+		<< setw(20) << "Expense"
+		<< setw(10) << "Amount" << endl;
+
+	cout << "-------------------------------\n";
+
+	for (int i = 0; i < expenseCount; i++) {
+		cout << left << setw(5) << i + 1
+			<< setw(20) << expenseName[i]
+			<< "RM " << fixed << setprecision(2) << expenseAmount[i] << endl;
+	}
+
+	cout << endl;
 }
+
 
 void setBudgetLimit() {
 
